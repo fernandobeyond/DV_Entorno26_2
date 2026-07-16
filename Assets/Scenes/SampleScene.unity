@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -206,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.049999952, y: 1.04, z: -3.6}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.5}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -256,6 +257,20 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7921b176ff459d48b47b03cde2428c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlCamara
+  sensibilidad: 0.5
+  cuerpoJugador: {fileID: 1605752542}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +553,8 @@ GameObject:
   - component: {fileID: 1605752540}
   - component: {fileID: 1605752539}
   - component: {fileID: 1605752538}
+  - component: {fileID: 1605752544}
+  - component: {fileID: 1605752543}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -649,13 +666,53 @@ Transform:
   m_GameObject: {fileID: 1605752537}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 570, y: 11, z: 457}
+  m_LocalPosition: {x: 500, y: 101, z: 500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1605752543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605752537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e2a7c4d6ba2fab4184236e395bf6f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovimientoJugador
+  velocidad: 5
+--- !u!54 &1605752544
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605752537}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 90
+  m_CollisionDetection: 0
 --- !u!1 &1672680903
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +725,6 @@ GameObject:
   - component: {fileID: 1672680907}
   - component: {fileID: 1672680906}
   - component: {fileID: 1672680905}
-  - component: {fileID: 1672680904}
   m_Layer: 0
   m_Name: Enemigo_1
   m_TagString: Untagged
@@ -676,21 +732,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1672680904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672680903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49f30f97b0a3e08499d196bb3d4fa69f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PropiedadesJugador
-  vida: 80
-  velocidad: 4
-  nombreJugador: Enemigo_1
 --- !u!65 &1672680905
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -778,7 +819,7 @@ Transform:
   m_GameObject: {fileID: 1672680903}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 564, y: 10.5, z: 461.7844}
+  m_LocalPosition: {x: 564, y: 100.5, z: 461.7844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -796,7 +837,6 @@ GameObject:
   - component: {fileID: 2054922804}
   - component: {fileID: 2054922803}
   - component: {fileID: 2054922802}
-  - component: {fileID: 2054922801}
   m_Layer: 0
   m_Name: Enemigo_2
   m_TagString: Untagged
@@ -804,21 +844,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2054922801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054922800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49f30f97b0a3e08499d196bb3d4fa69f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PropiedadesJugador
-  vida: 120
-  velocidad: 7
-  nombreJugador: Enemigo_2
 --- !u!65 &2054922802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -906,7 +931,7 @@ Transform:
   m_GameObject: {fileID: 2054922800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 575.45, y: 10.5, z: 461.7844}
+  m_LocalPosition: {x: 575.45, y: 100.5, z: 461.7844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
