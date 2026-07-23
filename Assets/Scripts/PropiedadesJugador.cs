@@ -39,7 +39,7 @@ public class PropiedadesJugador : MonoBehaviour {
 
     private void VerificarEstado() {
         if (vida >= 20) {
-            Debug.Log("Velocidad: " + velocidad + " - Vida = " + vida);
+            //Debug.Log("Velocidad: " + velocidad + " - Vida = " + vida);
         }
     }
 
