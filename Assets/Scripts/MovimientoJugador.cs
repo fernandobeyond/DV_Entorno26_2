@@ -12,6 +12,12 @@ public class MovimientoJugador : MonoBehaviour {
     public float velocidadCorrer = 9f;
     public float fuerzaSalto = 7f;
 
+    // Audio SFX
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioPasos;
+    [SerializeField] private float pitchCaminar = 1f;
+    [SerializeField] private float pitchCorrer = 1.4f;
+
     // Camara
     [Header("Cámara")]
     public Transform camaraJugador;
@@ -53,6 +59,10 @@ public class MovimientoJugador : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         NotificarCambioUI();
+
+        if (audioPasos == null) {
+            audioPasos = GetComponent<AudioSource>();
+        }
     }
 
     void Update() {
@@ -63,6 +73,7 @@ public class MovimientoJugador : MonoBehaviour {
 
         MoverJugador(corriendo);
         RotarCamara();
+        ControlarAudioPasos(corriendo);
     }
 
     private void MoverJugador(bool corriendo) {
@@ -96,6 +107,10 @@ public class MovimientoJugador : MonoBehaviour {
             rb.AddForce(Vector3.up * fuerzaSalto, ForceMode.Impulse);
             estaEnSuelo = false;
         }
+
+        if (audioPasos != null && audioPasos.isPlaying) {
+            audioPasos.Stop();
+        }
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -122,5 +137,24 @@ public class MovimientoJugador : MonoBehaviour {
 
     private void NotificarCambioUI(){
             uiManager.ActualizarHUD(salud, 100, monedasTotales, vidasRestantes);
+    }
+
+    private void ControlarAudioPasos(bool corriendo) {
+        if (audioPasos == null) return;
+
+        bool seEstaMoviendo = inputMovimiento.sqrMagnitude > 0.01f;
+
+        if (seEstaMoviendo && estaEnSuelo) {
+            // Ajustar velocidad del audio según si corre o camina
+            audioPasos.pitch = corriendo ? pitchCorrer : pitchCaminar;
+
+            if (!audioPasos.isPlaying) {
+                audioPasos.Play();
+            }
+        } else {
+            if (audioPasos.isPlaying) {
+                audioPasos.Stop();
+            }
+        }
     }
 }
