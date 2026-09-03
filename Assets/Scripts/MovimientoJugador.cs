@@ -132,8 +132,23 @@ public class MovimientoJugador : MonoBehaviour {
             NotificarCambioUI();
             Destroy(other.gameObject);
         }
+
+        if (other.CompareTag("QuitarSalud")) {
+            RecibirDanio(20);
+            Destroy(other.gameObject);
+        }
     }
 
+    public void RecibirDanio(int cantidad) {
+        salud -= cantidad;
+        Debug.Log("Salud actual: " + salud);
+        NotificarCambioUI();
+
+        if (salud <= 0) {
+            salud = 0;
+            Debug.Log("GAME OVER: Sin vidas.");
+        }
+    }
 
     private void NotificarCambioUI(){
             uiManager.ActualizarHUD(salud, 100, monedasTotales, vidasRestantes);
